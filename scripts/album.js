@@ -28,6 +28,21 @@ var albumPicasso = {
      ]
  };
 
+ var albumRemy = {
+     title: 'I am Your Dog',
+     artist: 'Remy the Dog',
+     label: 'Woof',
+     year: '2017',
+     albumArtUrl: 'assets/images/album_covers/19.png',
+     songs: [
+         { title: 'I will pee on that', duration: '1:05' },
+         { title: 'I do not know how to fetch', duration: '5:15' },
+         { title: 'Quietly farting', duration: '4:21'},
+         { title: 'How about we just sleep all the time?', duration: '6:14' },
+         { title: 'Growling at skateboarders', duration: '2:45'}
+     ]
+ };
+
  var createSongRow = function(songNumber, songName, songLength) {
      var template =
         '<tr class="album-view-song-item">'
@@ -40,24 +55,21 @@ var albumPicasso = {
      return template;
  };
 
- var setCurrentAlbum = function(album) {
-     // #1
-     var albumTitle = document.getElementsByClassName('album-view-title')[0];
-     var albumArtist = document.getElementsByClassName('album-view-artist')[0];
-     var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
-     var albumImage = document.getElementsByClassName('album-cover-art')[0];
-     var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+ var albumTitle = document.getElementsByClassName('album-view-title')[0];
+ var albumArtist = document.getElementsByClassName('album-view-artist')[0];
+ var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
+ var albumImage = document.getElementsByClassName('album-cover-art')[0];
+ var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
 
-     // #2
+ var setCurrentAlbum = function(album) {
+
      albumTitle.firstChild.nodeValue = album.title;
      albumArtist.firstChild.nodeValue = album.artist;
      albumReleaseInfo.firstChild.nodeValue = album.year + ' ' + album.label;
      albumImage.setAttribute('src', album.albumArtUrl);
 
-     // #3
      albumSongList.innerHTML = '';
 
-     // #4
      for (var i = 0; i < album.songs.length; i++) {
          albumSongList.innerHTML += createSongRow(i + 1, album.songs[i].title, album.songs[i].duration);
      }
@@ -65,4 +77,14 @@ var albumPicasso = {
 
  window.onload = function() {
      setCurrentAlbum(albumPicasso);
+
+     var albums = [albumPicasso, albumMarconi, albumRemy];
+     var index = 1;
+     albumImage.addEventListener("click", function(event) {
+       setCurrentAlbum(albums[index]);
+       index++;
+       if (index == albums.length) {
+         index = 0;
+       }
+     })
  };
