@@ -120,10 +120,10 @@ $(document).ready(function() {
  });
 
  var newSong = function() {
+console.log(this);
+   switch (this) {
 
-   switch (event.target) {
-
-    case $(this).hasClass("ion-skip-forward"):
+    case $(this).hasClass("next"):
     var currentSongIndex = trackIndex(currentAlbum, currentSongFromAlbum);
     currentSongIndex++;
 
@@ -137,7 +137,7 @@ $(document).ready(function() {
       currentSongFromAlbum = currentAlbum.songs[currentSongIndex];
      break;
 
-    case $(this).hasClass("ion-skip-backward"):
+    case $(this).hasClass("previous"):
     var currentSongIndex = trackIndex(currentAlbum, currentSongFromAlbum);
     currentSongIndex--;
 
