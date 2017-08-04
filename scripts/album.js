@@ -105,8 +105,8 @@ var getSongNumberCell = function(number) {
 
 $(document).ready(function() {
      setCurrentAlbum(albumPicasso);
-     $previousButton.click(previousSong);
-     $nextButton.click(nextSong);
+     $previousButton.click(newSong);
+     $nextButton.click(newSong);
 
      var albums = [albumPicasso, albumMarconi, albumRemy];
      var index = 1;
@@ -120,6 +120,10 @@ $(document).ready(function() {
  });
 
  var nextSong = function() {
+
+   switch (event.target) {
+     
+     case $nextButton:
      var currentSongIndex = trackIndex(currentAlbum, currentSongFromAlbum);
      currentSongIndex++;
 
@@ -131,17 +135,9 @@ $(document).ready(function() {
 
      currentlyPlayingSongNumber = currentSongIndex + 1;
      currentSongFromAlbum = currentAlbum.songs[currentSongIndex];
+     break;
 
-     updatePlayerBarSong();
-
-     var $nextSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
-     var $lastSongNumberCell = getSongNumberCell(lastSongNumber);
-
-     $nextSongNumberCell.html(pauseButtonTemplate);
-     $lastSongNumberCell.html(lastSongNumber);
- };
-
- var previousSong = function() {
+    case $previousButton:
     var currentSongIndex = trackIndex(currentAlbum, currentSongFromAlbum);
     currentSongIndex--;
 
@@ -153,14 +149,16 @@ $(document).ready(function() {
 
     currentlyPlayingSongNumber = currentSongIndex + 1;
     currentSongFromAlbum = currentAlbum.songs[currentSongIndex];
+    break;
+    }
 
     updatePlayerBarSong();
 
     $('.main-controls .play-pause').html(playerBarPauseButton);
 
-    var $previousSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
+    var $newSongNumberCell = getSongNumberCell(currentlyPlayingSongNumber);
     var $lastSongNumberCell = getSongNumberCell(lastSongNumber);
 
-    $previousSongNumberCell.html(pauseButtonTemplate);
+    $newSongNumberCell.html(pauseButtonTemplate);
     $lastSongNumberCell.html(lastSongNumber);
 };
