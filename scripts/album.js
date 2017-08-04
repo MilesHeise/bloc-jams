@@ -119,10 +119,10 @@ $(document).ready(function() {
      })
  });
 
- var nextSong = function() {
+ var newSong = function() {
 
    switch (event.target) {
-     
+
      case $nextButton:
      var currentSongIndex = trackIndex(currentAlbum, currentSongFromAlbum);
      currentSongIndex++;
@@ -133,8 +133,7 @@ $(document).ready(function() {
 
      var lastSongNumber = currentlyPlayingSongNumber;
 
-     currentlyPlayingSongNumber = currentSongIndex + 1;
-     currentSongFromAlbum = currentAlbum.songs[currentSongIndex];
+     setSong(currentSongIndex + 1);
      break;
 
     case $previousButton:
@@ -147,8 +146,7 @@ $(document).ready(function() {
 
     var lastSongNumber = currentlyPlayingSongNumber;
 
-    currentlyPlayingSongNumber = currentSongIndex + 1;
-    currentSongFromAlbum = currentAlbum.songs[currentSongIndex];
+    setSong(currentSongIndex + 1);
     break;
     }
 
