@@ -123,9 +123,9 @@ $(document).ready(function() {
 
    switch (event.target) {
 
-     case $nextButton:
-     var currentSongIndex = trackIndex(currentAlbum, currentSongFromAlbum);
-     currentSongIndex++;
+    case $(this).hasClass("ion-skip-forward"):
+    var currentSongIndex = trackIndex(currentAlbum, currentSongFromAlbum);
+    currentSongIndex++;
 
      if (currentSongIndex >= currentAlbum.songs.length) {
          currentSongIndex = 0;
@@ -133,10 +133,11 @@ $(document).ready(function() {
 
      var lastSongNumber = currentlyPlayingSongNumber;
 
-     setSong(currentSongIndex + 1);
+     currentlyPlayingSongNumber = currentSongIndex + 1;
+      currentSongFromAlbum = currentAlbum.songs[currentSongIndex];
      break;
 
-    case $previousButton:
+    case $(this).hasClass("ion-skip-backward"):
     var currentSongIndex = trackIndex(currentAlbum, currentSongFromAlbum);
     currentSongIndex--;
 
@@ -146,7 +147,8 @@ $(document).ready(function() {
 
     var lastSongNumber = currentlyPlayingSongNumber;
 
-    setSong(currentSongIndex + 1);
+    currentlyPlayingSongNumber = currentSongIndex + 1;
+      currentSongFromAlbum = currentAlbum.songs[currentSongIndex];
     break;
     }
 
