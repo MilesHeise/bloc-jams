@@ -123,7 +123,7 @@ $(document).ready(function() {
 
      var albums = [albumPicasso, albumMarconi, albumRemy];
      var index = 1;
-     albumImage.addEventListener("click", function(event) {
+     $albumImage.click(function(event) {
        setCurrentAlbum(albums[index]);
        index++;
        if (index == albums.length) {
