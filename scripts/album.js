@@ -127,11 +127,13 @@ var getSongNumberCell = function(number) {
 
  var $previousButton = $('.main-controls .previous');
  var $nextButton = $('.main-controls .next');
+ var $playButton = $('.main-controls .play-pause');
 
 $(document).ready(function() {
      setCurrentAlbum(albumPicasso);
      $previousButton.click(previousSong);
      $nextButton.click(nextSong);
+     $playButton.click(togglePlayFromPlayerBar);
 
      var albums = [albumPicasso, albumMarconi, albumRemy];
      var index = 1;
@@ -188,4 +190,17 @@ $(document).ready(function() {
 
     $previousSongNumberCell.html(pauseButtonTemplate);
     $lastSongNumberCell.html(lastSongNumber);
+};
+
+var togglePlayFromPlayerBar = function() {
+  var currentlyPlayingCell = getSongNumberCell(currentlyPlayingSongNumber);
+  if (currentSoundFile.isPaused()) {
+    $(this).html(playerBarPauseButton);
+    currentlyPlayingCell.html(pauseButtonTemplate);
+    currentSoundFile.play();
+  } else if (currentSoundFile) {
+    $(this).html(playerBarPlayButton);
+    currentlyPlayingCell.html(playButtonTemplate);
+    currentSoundFile.pause();
+  }
 };
